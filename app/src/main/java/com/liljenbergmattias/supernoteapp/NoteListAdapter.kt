@@ -40,14 +40,6 @@ class NoteListAdapter() : RecyclerView.Adapter<NoteListViewHolder>() {
 
         holder.notetitleText.text = rownote.title
 
-        /*
-        if (rownote.noteedited == true)
-        {
-            holder.noteupdated.visibility = View.VISIBLE
-        } else {
-            holder.noteupdated.visibility = View.INVISIBLE
-        }
-         */
 
 
         holder.itemView.setOnClickListener {
@@ -55,12 +47,10 @@ class NoteListAdapter() : RecyclerView.Adapter<NoteListViewHolder>() {
 
         }
 
-        fun removeItemAt()
-        {
 
-        }
 
     }
+
 
 
 

@@ -112,15 +112,15 @@ class NoteViewmodel : ViewModel() {
         child("notese")
 
 
-            if(mynotes.fbid == null)
-            {
+        if(mynotes.fbid == null)
+        {
 
-                notespath.push().setValue(mynotes)
-            } else {
+            notespath.push().setValue(mynotes)
+        } else {
 
 
-                notespath.child(mynotes.fbid!!).setValue(mynotes)
-            }
+            notespath.child(mynotes.fbid!!).setValue(mynotes)
+        }
 
         saveNoteStatus.value = true
         saveNoteStatus.value = null
@@ -130,7 +130,7 @@ class NoteViewmodel : ViewModel() {
 
 
 
-fun loadNotes()
+    fun loadNotes()
     {
         val database = Firebase.database.reference
         val auth = Firebase.auth

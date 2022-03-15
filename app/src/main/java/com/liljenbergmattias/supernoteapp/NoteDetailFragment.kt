@@ -25,7 +25,7 @@ class NoteDetailFragment : Fragment() {
     private var _binding : FragmentNoteDetailBinding? = null
     private val binding get() = _binding!!
 
-    val model : NoteViewmodel by viewModels()
+    val model : NoteViewmodel by activityViewModels()
 
     var currentnote = Note()
 
@@ -51,21 +51,20 @@ class NoteDetailFragment : Fragment() {
 
             currentnote.title = binding.noteAddTitleEdittext.text.toString()
             currentnote.notecontext = binding.noteContentText.text.toString()
-
-
             model.saveNote(currentnote)
+            Snackbar.make(view, "Sparat anteckning!", Snackbar.LENGTH_SHORT).show()
 
         }
 
 
         val savestatusobserver = Observer<Boolean> {
             if (it == true)
-               {
+            {
 
-                   Log.i("NOTEDEBUG", "Stäng frag " + currentnote.title)
-                   requireActivity().supportFragmentManager.popBackStack()
+                Log.i("NOTEDEBUG", "Stäng frag " + currentnote.title)
+                requireActivity().supportFragmentManager.popBackStack()
 
-           }
+            }
 
         }
         model.saveNoteStatus.observe(viewLifecycleOwner, savestatusobserver)
