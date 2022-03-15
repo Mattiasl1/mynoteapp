@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "553193375315",
+    "firebase_url": "https://allournotesproject-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "allournotesproject",
+    "storage_bucket": "allournotesproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553193375315:android:0e33f9b83a5923c23f28a6",
+        "android_client_info": {
+          "package_name": "com.liljenbergmattias.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553193375315-9lme8m2m3uspm1cgke0u4425cp1uj57d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDreKgd-8iqUwaLdc05hVm6I98YJay_CH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553193375315-9lme8m2m3uspm1cgke0u4425cp1uj57d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553193375315:android:9738f8352dfdcdea3f28a6",
+        "android_client_info": {
+          "package_name": "com.liljenbergmattias.supernoteapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553193375315-9lme8m2m3uspm1cgke0u4425cp1uj57d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDreKgd-8iqUwaLdc05hVm6I98YJay_CH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553193375315-9lme8m2m3uspm1cgke0u4425cp1uj57d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
