@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.snapshot.Index
 
 class NoteListAdapter() : RecyclerView.Adapter<NoteListViewHolder>() {
 
 
-
-
     lateinit var startfrag : StartFragment
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListViewHolder {
         val vh = NoteListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.note_list_item, parent, false))
@@ -36,14 +33,37 @@ class NoteListAdapter() : RecyclerView.Adapter<NoteListViewHolder>() {
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
 
 
-        val rownote = startfrag.model.notes.value!![position]
+
+
+        var rownote = startfrag.model.notes.value!![position]
+
 
         holder.notetitleText.text = rownote.title
 
+       /*  **VISA ATT NÅGON HAR REDIGERAT**
+        if (rownote.noteedited == true)
+        {
+            holder.noteupdated.visibility = View.VISIBLE
+        } else {
+            holder.noteupdated.visibility = View.INVISIBLE
+        }
+
+        */
+        holder.deleteImage.isClickable
+        holder.deleteImage.setOnClickListener {
+
+            startfrag.deleterow(key = rownote.fbid!!)
+            startfrag.model.loadNotes()
+
+        }
 
 
         holder.itemView.setOnClickListener {
             startfrag.goNote(rownote)
+
+          //  holder.noteupdated.visibility = View.INVISIBLE
+
+
 
         }
 

@@ -18,12 +18,17 @@ import com.google.firebase.ktx.Firebase
 import com.liljenbergmattias.supernoteapp.databinding.FragmentNoteDetailBinding
 import com.liljenbergmattias.supernoteapp.databinding.FragmentStartBinding
 
-class NoteDetailFragment : Fragment() {
+
+
+
+class NoteDetailFragment : Fragment(), PressOnBack {
 
 
 
     private var _binding : FragmentNoteDetailBinding? = null
     private val binding get() = _binding!!
+
+    val notelistadapter = NoteListAdapter()
 
     val model : NoteViewmodel by activityViewModels()
 
@@ -39,6 +44,8 @@ class NoteDetailFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,12 +54,26 @@ class NoteDetailFragment : Fragment() {
         binding.noteAddTitleEdittext.setText(currentnote.title)
         binding.noteContentText.setText(currentnote.notecontext)
 
-        binding.noteSaveButton.setOnClickListener {
+        val titletextview = binding.noteAddTitleEdittext
 
-            currentnote.title = binding.noteAddTitleEdittext.text.toString()
-            currentnote.notecontext = binding.noteContentText.text.toString()
-            model.saveNote(currentnote)
-            Snackbar.make(view, "Sparat anteckning!", Snackbar.LENGTH_SHORT).show()
+
+
+        binding.noteSaveButton.setOnClickListener {
+            //TODO: kontrollera att det finns en titel
+
+            if (titletextview.text.isNotEmpty()){
+                currentnote.noteedited = true
+                currentnote.title = binding.noteAddTitleEdittext.text.toString()
+                currentnote.notecontext = binding.noteContentText.text.toString()
+                model.saveNote(currentnote)
+
+                Snackbar.make(view, "Sparat anteckning!", Snackbar.LENGTH_SHORT).show()
+            } else{
+                Snackbar.make(view, "Du behöver ange en titel!", Snackbar.LENGTH_SHORT).show()
+            }
+
+
+        // Snackbar.make(view, "Du måste ha en titel!", Snackbar.LENGTH_SHORT).show()
 
         }
 
@@ -72,11 +93,29 @@ class NoteDetailFragment : Fragment() {
 
 
 
+
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+
+    override fun pressBack(): Boolean {
+
+        Log.i("NOTEDEBUG", "Back pressed, note not edited")
+
+        currentnote.noteedited = false
+        notelistadapter.notifyDataSetChanged()
+
+            return true
+
+
+
     }
 
 

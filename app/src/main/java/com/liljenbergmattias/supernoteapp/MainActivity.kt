@@ -2,6 +2,7 @@ package com.liljenbergmattias.supernoteapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,13 @@ ATT GÖRA LISTA:
 
 
  */
+
+interface PressOnBack {
+
+    fun pressBack() : Boolean
+}
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,11 +59,18 @@ class MainActivity : AppCompatActivity() {
         model.loginOK.observe(this, loginObserver)
 
 
+    }
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        Log.i("NOTEDEBUG", supportFragmentManager.fragments.size.toString() )
 
+       var lastfrag = supportFragmentManager.fragments.last() as PressOnBack
+       if (lastfrag.pressBack() == true)
+       {
+           super.onBackPressed()
 
-
-
+       }
 
     }
 }

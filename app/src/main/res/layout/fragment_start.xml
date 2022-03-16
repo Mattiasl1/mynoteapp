@@ -8,17 +8,20 @@
     android:clickable="true"
     tools:context=".StartFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:background="#E3E3E3"
+        android:overScrollMode="always"
+        android:background="@drawable/gradient_backgound"
         app:layout_constraintBottom_toTopOf="@+id/addNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTitle" />
+
 
     <TextView
         android:id="@+id/startTitle"

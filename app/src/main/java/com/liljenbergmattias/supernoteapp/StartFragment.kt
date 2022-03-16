@@ -1,22 +1,30 @@
 package com.liljenbergmattias.supernoteapp
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.liljenbergmattias.supernoteapp.databinding.FragmentStartBinding
 
 
-class StartFragment : Fragment() {
-
+class StartFragment : Fragment(), PressOnBack {
 
 
     private var _binding : FragmentStartBinding? = null
     private val binding get() = _binding!!
+
+    var allnotes = Note()
 
     val model : NoteViewmodel by activityViewModels()
 
@@ -26,6 +34,9 @@ class StartFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         notelistadapter.startfrag = this
+
+
+
     }
 
 
@@ -42,10 +53,16 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val mynoteRV = binding.notesRV
+        mynoteRV.apply {
+            binding.notesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+            binding.notesRV.adapter = notelistadapter
+
+            edgeEffectFactory = BounceEdgeEffectFactory()
+        }
 
 
-        binding.notesRV.layoutManager = LinearLayoutManager(requireContext())
-        binding.notesRV.adapter = notelistadapter
 
 
 
@@ -79,13 +96,7 @@ class StartFragment : Fragment() {
         _binding = null
     }
 
-    /*
-    fun clicksavebutton(rownumber : Int)
-    {
-        model.toggleEdited(rownumber)
 
-    }
-     */
 
     fun goNote(rownotes : Note)
     {
@@ -96,6 +107,49 @@ class StartFragment : Fragment() {
         supportFragmentManager.beginTransaction().
         add((R.id.fragContainer), notedetailfrag).addToBackStack(null).commit()
     }
+
+
+    fun deleterow(key : String)
+    {
+        val database = Firebase.database.reference
+        val auth = Firebase.auth
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Radera anteckning")
+        builder.setMessage("Vill du verkligen radera din anteckning?")
+
+
+        builder.setPositiveButton("Radera") { dialog, which ->
+
+            database.child("myNotesapp").child(auth.currentUser!!.uid).
+            child("notese").child(key).removeValue()
+            requireActivity().supportFragmentManager.beginTransaction().
+            add((R.id.fragContainer), StartFragment()).replace(R.id.fragContainer, StartFragment()).commit()
+            notelistadapter.notifyDataSetChanged()
+
+
+        }
+
+        builder.setNegativeButton("Ångra") { dialog, which ->
+
+        }
+        builder.show()
+
+
+
+
+
+    }
+
+    override fun pressBack(): Boolean {
+        return false
+    }
+
+
+    /*
+    database.child("myNotesapp").child(auth.currentUser!!.uid).
+        child("notese").removeValue()
+     */
 
 
 

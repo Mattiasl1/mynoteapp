@@ -30,6 +30,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="#FFF4F4DD"
         android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="start|top"
@@ -57,7 +58,7 @@
     <ScrollView
         android:id="@+id/noteColorScrollview"
         android:layout_width="409dp"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"

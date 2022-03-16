@@ -2,6 +2,7 @@ package com.liljenbergmattias.supernoteapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -155,6 +156,8 @@ class NoteViewmodel : ViewModel() {
         }.addOnFailureListener {
 
         }
+
+
 
     }
 
