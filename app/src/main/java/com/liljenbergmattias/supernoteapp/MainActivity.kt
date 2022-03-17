@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             {
 
                 supportFragmentManager.beginTransaction().replace(R.id.fragContainer, StartFragment()).commit()
+
             } else {
                 supportFragmentManager.beginTransaction().replace(R.id.fragContainer, LoginFragment()).commit()
             }

@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
 
             if (it == LoginResult.LOGINOK)
             {
-                Snackbar.make(view, "lyckad inloggning!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, "Välkommen!", Snackbar.LENGTH_SHORT).show()
             }
 
             if(it == LoginResult.LOGINFAIL)

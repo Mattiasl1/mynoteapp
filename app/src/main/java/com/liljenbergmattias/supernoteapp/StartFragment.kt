@@ -108,6 +108,15 @@ class StartFragment : Fragment(), PressOnBack {
         add((R.id.fragContainer), notedetailfrag).addToBackStack(null).commit()
     }
 
+    fun toggleEdited(key: String)
+    {
+        val database = Firebase.database.reference
+        val auth = Firebase.auth
+        database.child("myNotesapp").child(auth.currentUser!!.uid).
+        child("notese").child(key)
+            notelistadapter.notifyDataSetChanged()
+    }
+
 
     fun deleterow(key : String)
     {

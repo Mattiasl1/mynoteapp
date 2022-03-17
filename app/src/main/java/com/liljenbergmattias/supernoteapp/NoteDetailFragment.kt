@@ -62,10 +62,16 @@ class NoteDetailFragment : Fragment(), PressOnBack {
             //TODO: kontrollera att det finns en titel
 
             if (titletextview.text.isNotEmpty()){
-                currentnote.noteedited = true
                 currentnote.title = binding.noteAddTitleEdittext.text.toString()
                 currentnote.notecontext = binding.noteContentText.text.toString()
                 model.saveNote(currentnote)
+
+               /* // *****NÅGON HAR REDIGERAT NOTE*****
+                notelistadapter.startfrag.toggleEdited(key = currentnote.fbid!!)
+                currentnote.noteedited = true
+                notelistadapter.notifyDataSetChanged()
+                */
+
 
                 Snackbar.make(view, "Sparat anteckning!", Snackbar.LENGTH_SHORT).show()
             } else{
@@ -73,7 +79,7 @@ class NoteDetailFragment : Fragment(), PressOnBack {
             }
 
 
-        // Snackbar.make(view, "Du måste ha en titel!", Snackbar.LENGTH_SHORT).show()
+
 
         }
 

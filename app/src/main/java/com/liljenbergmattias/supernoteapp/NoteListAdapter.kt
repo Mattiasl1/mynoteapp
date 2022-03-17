@@ -40,15 +40,18 @@ class NoteListAdapter() : RecyclerView.Adapter<NoteListViewHolder>() {
 
         holder.notetitleText.text = rownote.title
 
-       /*  **VISA ATT NÅGON HAR REDIGERAT**
+       // **VISA ATT NÅGON HAR REDIGERAT**
+
+       /*
         if (rownote.noteedited == true)
         {
             holder.noteupdated.visibility = View.VISIBLE
         } else {
             holder.noteupdated.visibility = View.INVISIBLE
         }
-
         */
+
+
         holder.deleteImage.isClickable
         holder.deleteImage.setOnClickListener {
 
