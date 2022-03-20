@@ -14,10 +14,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:overScrollMode="always"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/gradient_backgound"
-        app:layout_constraintBottom_toTopOf="@+id/addNoteButton"
+        android:overScrollMode="always"
+        android:scrollbarSize="5dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/startAddButtonImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTitle" />
@@ -31,36 +33,70 @@
         android:fontFamily="sans-serif-medium"
         android:text="Anteckningar"
         android:textColor="#131313"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/noteStartReloadRvImage"
+        app:layout_constraintStart_toEndOf="@+id/noteStartLogoutImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_button"
-        android:text="Ny anteckning"
+        android:layout_marginBottom="8dp"
+
         android:padding="5dp"
-        android:textColor="#050505"
-        android:textSize="14sp"
+        android:src="@drawable/ic_round_add_box_24"
+
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/logOutButton"
+
+
+    <ImageView
+        android:id="@+id/noteStartLogoutImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/customtextfield"
+        android:src="@drawable/ic_baseline_logout_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/noteStartReloadRvImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/customtextfield"
+        android:src="@drawable/ic_baseline_settings_backup_restore_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/noteStartprogressBar"
+        style="?android:attr/progressBarStyle"
+        android:progressBackgroundTint="@color/myBluecolor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_button"
-        android:text="logga ut"
-        android:textColor="#050505"
-        android:padding="5dp"
-        android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/startAddButtonImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/customtextfield"
+        android:src="@drawable/ic_round_add_box_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitXY" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

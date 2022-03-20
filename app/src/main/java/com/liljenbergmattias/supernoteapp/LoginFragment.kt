@@ -17,6 +17,8 @@ class LoginFragment : Fragment() {
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    val FirstLogin = Boolean
+
     private val model : NoteViewmodel by activityViewModels()
 
     override fun onCreateView(
@@ -31,6 +33,15 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val passwordControll = binding.loginPasswordedittextTWO.text.toString()
+        val passwordOne = binding.loginPasswordedittext.text.toString()
+
+        binding.loginPasswordedittextTWO.visibility = View.INVISIBLE
+
+
+
+
+
 
 
 
@@ -41,11 +52,17 @@ class LoginFragment : Fragment() {
 
         }
 
+
         binding.registerButton.setOnClickListener {
 
-            val email = binding.loginEmailEdittext.text.toString()
-            val password = binding.loginPasswordedittext.text.toString()
-            model.signup(email, password)
+            if (passwordControll == passwordOne )
+            {
+                val email = binding.loginEmailEdittext.text.toString()
+                val password = binding.loginPasswordedittext.text.toString()
+                model.signup(email, password)
+            }
+
+
 
 
         }
@@ -70,6 +87,8 @@ class LoginFragment : Fragment() {
                 Log.i("NOTEDEBUG", "REGISTER FAIL")
                 Snackbar.make(view, "Felaktig registrering", Snackbar.LENGTH_SHORT).show()
             }
+
+
         }
         model.loginStatus.observe(viewLifecycleOwner, loginobserver)
 

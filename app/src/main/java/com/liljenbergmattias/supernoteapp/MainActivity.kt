@@ -3,6 +3,7 @@ package com.liljenbergmattias.supernoteapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
@@ -13,12 +14,28 @@ import com.google.firebase.ktx.Firebase
 
 /*
 ATT GÖRA LISTA:
-                 ta bort rad
-                kan ej spara utan en titel
-                visa att anteckningen är redigerad
 
-                Bättra på UI
-                anpassa anteckningar, t.ex textstorlek, färg.
+                            **Inloggning**
+                Kontrollera att email existerar?  -> validera email
+                Kontrollera lösenord vid registrering?
+                Återställa lösenord?
+                            ******************************
+                            ******************************
+
+
+                ta bort rad - klar, Swipe left to delete - fråga Bill
+                visa att anteckningen är redigerad - fråga Bill
+                Kunna välja att ha checklista - fråga bill
+                ändra position på snackbar
+
+
+                Ny rad, alltid stor bokstav - Klar
+                Respons när man klickr på en anteckning (ONpress -> vibrera)
+                välja textfärg och kanske färg på anteckningen i recyclerview.
+
+                Bättra på UI -
+                anpassa anteckningar, t.ex textstorlek, färg. -
+
 
 
 
@@ -57,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fragContainer, LoginFragment()).commit()
             }
         }
+
+        findViewById<TextView>(R.id.loginPasswordedittextTWO)
 
         model.loginOK.observe(this, loginObserver)
 

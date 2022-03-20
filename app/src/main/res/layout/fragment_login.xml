@@ -13,9 +13,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-        android:background="#FFF1F1F1"
+        android:background="@drawable/customtextfield"
         android:ems="10"
         android:hint=" Email"
         android:inputType="textEmailAddress"
@@ -30,7 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#F1F1F1"
+        android:background="@drawable/customtextfield"
         android:ems="10"
         android:hint=" Lösenord"
         android:inputType="textPassword"
@@ -38,17 +38,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginEmailEdittext" />
 
+    <EditText
+        android:id="@+id/loginPasswordedittextTWO"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/customtextfield"
+        android:ems="10"
+        android:hint=" Repetera lösenord"
+        android:inputType="textPassword"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittext" />
+
     <Button
         android:id="@+id/registerButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/rounded_button"
-        android:text="Registrera"
         android:padding="5dp"
+        android:text="Registrera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittext" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittextTWO" />
 
     <Button
         android:id="@+id/loginButton"

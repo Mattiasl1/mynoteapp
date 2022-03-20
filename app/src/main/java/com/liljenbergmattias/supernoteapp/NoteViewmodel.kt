@@ -10,7 +10,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 enum class LoginResult {
-    LOGINOK, LOGINFAIL, REGISTERFAIL
+    LOGINOK, LOGINFAIL, REGISTERFAIL, FIRSTLOGIN
 }
 
 enum class NoteEdited {
@@ -19,6 +19,8 @@ enum class NoteEdited {
 
 class NoteViewmodel : ViewModel() {
     lateinit var database: DatabaseReference
+
+
 
 
     val saveNoteStatus: MutableLiveData<Boolean> by lazy {
@@ -160,6 +162,8 @@ class NoteViewmodel : ViewModel() {
 
 
     }
+
+
 
 
 

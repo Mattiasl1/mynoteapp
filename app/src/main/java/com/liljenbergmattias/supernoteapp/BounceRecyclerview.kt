@@ -2,22 +2,28 @@ package com.liljenbergmattias.supernoteapp
 
 
 
+import android.content.res.Resources
 import android.graphics.Canvas
+import android.os.Build
+import android.view.View
 import android.widget.EdgeEffect
+import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors.getColor
 
+/** The magnitude of translation distance while the list is over-scrolled. */
+private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.4f
 
-private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.8f
-
-
-private const val FLING_TRANSLATION_MAGNITUDE = 0.2f
+/** The magnitude of translation distance when the list reaches the edge on fling. */
+private const val FLING_TRANSLATION_MAGNITUDE = 0.1f
 
 
 class BounceEdgeEffectFactory : RecyclerView.EdgeEffectFactory() {
 
     override fun createEdgeEffect(recyclerView: RecyclerView, direction: Int): EdgeEffect {
+
 
         return object : EdgeEffect(recyclerView.context) {
 
@@ -32,6 +38,7 @@ class BounceEdgeEffectFactory : RecyclerView.EdgeEffectFactory() {
             override fun onPull(deltaDistance: Float, displacement: Float) {
                 super.onPull(deltaDistance, displacement)
                 handlePull(deltaDistance)
+
             }
 
             private fun handlePull(deltaDistance: Float) {
@@ -81,5 +88,6 @@ class BounceEdgeEffectFactory : RecyclerView.EdgeEffectFactory() {
                 )
 
         }
+
     }
 }
