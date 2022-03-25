@@ -5,22 +5,28 @@
       <map>
         <entry key="app/src/main/res/drawable/backgroundtest.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/circlebutton.xml" value="0.199" />
+        <entry key="app/src/main/res/drawable/circlebutton_black.xml" value="0.21" />
+        <entry key="app/src/main/res/drawable/circlebutton_red.xml" value="0.21" />
         <entry key="app/src/main/res/drawable/customitemnote.xml" value="0.199" />
         <entry key="app/src/main/res/drawable/customtextfield.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/delete_row.xml" value="0.183" />
         <entry key="app/src/main/res/drawable/gradient_backgound.xml" value="0.183" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_list_bulleted_24.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_baseline_home2_24.xml" value="0.223" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.223" />
         <entry key="app/src/main/res/drawable/ic_baseline_notes_24.xml" value="0.223" />
+        <entry key="app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.1285" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_backup_restore_24.xml" value="0.1285" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_round_add_box_24.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/ic_round_save_24.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/ic_round_text_snippet_24.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.183" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24649353027343748" />
         <entry key="app/src/main/res/layout/fragment_edit_note_detail.xml" value="0.25364583333333335" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25364583333333335" />
-        <entry key="app/src/main/res/layout/fragment_note_detail.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_note_detail.xml" value="0.15725250244140623" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.25" />
         <entry key="app/src/main/res/layout/note_list_item.xml" value="0.25" />
       </map>

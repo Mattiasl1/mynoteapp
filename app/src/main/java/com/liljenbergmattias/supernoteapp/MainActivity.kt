@@ -24,14 +24,14 @@ ATT GÖRA LISTA:
 
 
                 ta bort rad - klar, Swipe left to delete - fråga Bill
-                visa att anteckningen är redigerad - fråga Bill
+
                 Kunna välja att ha checklista - fråga bill
-                ändra position på snackbar
 
 
+                Reorder item
                 Ny rad, alltid stor bokstav - Klar
-                Respons när man klickr på en anteckning (ONpress -> vibrera)
-                välja textfärg och kanske färg på anteckningen i recyclerview.
+                Respons när man klickr på en anteckning (ONpress -> vibrera) - klar
+
 
                 Bättra på UI -
                 anpassa anteckningar, t.ex textstorlek, färg. -
@@ -42,6 +42,8 @@ ATT GÖRA LISTA:
  */
 
 interface PressOnBack {
+
+
 
     fun pressBack() : Boolean
 }

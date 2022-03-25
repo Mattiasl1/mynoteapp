@@ -1,6 +1,7 @@
 package com.liljenbergmattias.supernoteapp
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -31,13 +32,8 @@ import com.liljenbergmattias.supernoteapp.databinding.FragmentStartBinding
 
 class NoteDetailFragment : Fragment(), PressOnBack {
 
-
-
-
     private var _binding : FragmentNoteDetailBinding? = null
     private val binding get() = _binding!!
-
-
 
     val notelistadapter = NoteListAdapter()
 
@@ -90,13 +86,33 @@ class NoteDetailFragment : Fragment(), PressOnBack {
 
         val homeButton = binding.noteDetailsHomeImage
 
-        val savebutton = binding.noteSaveButton
+        binding.noteDetailBlueColor.setOnClickListener {
+            vibrateOnClick()
+            notecontextrule.setTextColor(Color.parseColor("#4C86B3"))
+            titletextview.setTextColor(Color.parseColor("#4C86B3"))
+        }
+        binding.noteDetailRedColor.setOnClickListener {
+            vibrateOnClick()
+            notecontextrule.setTextColor(Color.parseColor("#9E5252"))
+            titletextview.setTextColor(Color.parseColor("#9E5252"))
+        }
+        binding.noteDetailBlackColor.setOnClickListener {
+            vibrateOnClick()
+            notecontextrule.setTextColor(Color.parseColor("#000000"))
+            titletextview.setTextColor(Color.parseColor("#000000"))
+        }
+
+
+
         fun pressedSave()
         {
+
             if (titletextview.text.isNotEmpty()){
                 currentnote.title = binding.noteAddTitleEdittext.text.toString()
                 currentnote.notecontext = binding.noteContentText.text.toString()
+
                 model.saveNote(currentnote)
+
 
                 /* // *****NÅGON HAR REDIGERAT NOTE*****
                  notelistadapter.startfrag.toggleEdited(key = currentnote.fbid!!)
@@ -227,7 +243,7 @@ class NoteDetailFragment : Fragment(), PressOnBack {
 
         Log.i("NOTEDEBUG", "Back pressed, note not edited")
 
-        currentnote.noteedited = false
+
         notelistadapter.notifyDataSetChanged()
 
             return true

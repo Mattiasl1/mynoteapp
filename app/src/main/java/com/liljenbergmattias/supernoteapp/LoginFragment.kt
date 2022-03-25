@@ -1,6 +1,10 @@
 package com.liljenbergmattias.supernoteapp
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +42,15 @@ class LoginFragment : Fragment() {
 
         binding.loginPasswordedittextTWO.visibility = View.INVISIBLE
 
+        fun vibrateOnClick() {
+            val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(50)
+            }
+        }
+
 
 
 
@@ -46,6 +59,7 @@ class LoginFragment : Fragment() {
 
 
         binding.loginButton.setOnClickListener {
+            vibrateOnClick()
             val email = binding.loginEmailEdittext.text.toString()
             val password = binding.loginPasswordedittext.text.toString()
             model.login(email, password)
@@ -54,15 +68,12 @@ class LoginFragment : Fragment() {
 
 
         binding.registerButton.setOnClickListener {
+            vibrateOnClick()
 
-            if (passwordControll == passwordOne )
-            {
+
                 val email = binding.loginEmailEdittext.text.toString()
                 val password = binding.loginPasswordedittext.text.toString()
                 model.signup(email, password)
-            }
-
-
 
 
         }

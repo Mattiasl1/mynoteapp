@@ -3,10 +3,9 @@ package com.liljenbergmattias.supernoteapp
 
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
+import android.graphics.Color
+import android.net.SocketKeepalive
+import android.os.*
 import android.provider.ContactsContract
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,12 +14,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Adapter
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.core.view.size
 
 import androidx.fragment.app.activityViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,30 +33,29 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.liljenbergmattias.supernoteapp.databinding.FragmentStartBinding
+import kotlinx.coroutines.flow.callbackFlow
+import java.util.*
+import javax.security.auth.callback.Callback
 
 
-class StartFragment : Fragment(), PressOnBack {
 
-
+class StartFragment() : Fragment(), PressOnBack {
 
     private var _binding : FragmentStartBinding? = null
     private val binding get() = _binding!!
 
+
     var allnotes = Note()
-
     val model : NoteViewmodel by activityViewModels()
-
     val notelistadapter = NoteListAdapter()
+    var noteedited = false
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         notelistadapter.startfrag = this
-
-
-
-
-
 
     }
 
@@ -76,8 +78,6 @@ class StartFragment : Fragment(), PressOnBack {
 
 
 
-
-
         val mynoteRV = binding.notesRV
         mynoteRV.apply {
             binding.notesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -85,28 +85,67 @@ class StartFragment : Fragment(), PressOnBack {
             binding.notesRV.adapter = notelistadapter
 
             edgeEffectFactory = BounceEdgeEffectFactory()
-        }
 
-        /* ***SWIPE TO DELETE ???
-        val item=object :SwipeToDelete(requireContext(), 0,ItemTouchHelper.LEFT) {
+        }
+   
+
+
+
+
+
+
+        var simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+            DEFAULT_SWIPE_ANIMATION_DURATION)
+        {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val database = Firebase.database.reference
+                val auth = Firebase.auth
+/*
+                 if positionindex >= oldpositionindex
+                 index -1
+                 else
+                 index +1
+                  */
+
+
+                val startPosition = viewHolder.adapterPosition
+                val endposition = target.adapterPosition
+
+
+                Collections.swap(model.notes.value!!, startPosition, endposition)
+
+                notelistadapter.notifyItemMoved(startPosition, endposition)
+
+
+
+
+                return true
+
+
+            }
+
+
+
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                notelistadapter.deleterowatposition()
-            }//viewHolder: RecyclerView.ViewHolder, direction: Int
-        }
 
-        val itemTouchHelper=ItemTouchHelper(item)
+                //model.notes.value!!
+                notelistadapter.notifyDataSetChanged()
+                return
+            }
+
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(mynoteRV)
-         */
+
+
 
 
         val reloadImage = binding.noteStartReloadRvImage
-        /*
-         reloadImage.animate().apply {
-                duration = 1000
 
-                rotationXBy(360f)
-            }.start()
-         */
 
 
 
@@ -118,6 +157,8 @@ class StartFragment : Fragment(), PressOnBack {
                 rotationXBy(180f)
             }.start()
             Log.i("NOTEDEBUG", "LADDA OM RECYCLERVIEW")
+            model.loadNotes()
+        /*
             binding.noteStartprogressBar.visibility = View.VISIBLE
             val noteobserver = Observer<List<Note>> {
 
@@ -126,8 +167,10 @@ class StartFragment : Fragment(), PressOnBack {
 
             model.notes.observe(viewLifecycleOwner, noteobserver)
 
-            model.loadNotes()
+
             binding.noteStartprogressBar.visibility = View.INVISIBLE
+
+             */
         }
         val scaleUp = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_up)
         val scaleDown = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_down)
@@ -137,7 +180,7 @@ class StartFragment : Fragment(), PressOnBack {
         {
 
 
-                notelistadapter.notifyDataSetChanged()
+
 
               var delaytrans = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -145,6 +188,8 @@ class StartFragment : Fragment(), PressOnBack {
                 delaytrans.add((R.id.fragContainer), NoteDetailFragment())
                 delaytrans.addToBackStack(null)
                 delaytrans.commit()
+
+            notelistadapter.notifyDataSetChanged()
         }
 
         logOutImage.setOnTouchListener { v, event ->
@@ -179,7 +224,7 @@ class StartFragment : Fragment(), PressOnBack {
             true
         }
 
-        reloadImage.setOnTouchListener { v, event ->
+        reloadImage.setOnTouchListener { _, event ->
 
 
             val action = event.action
@@ -358,13 +403,10 @@ class StartFragment : Fragment(), PressOnBack {
 
         builder.setNegativeButton("Ångra") { dialog, which ->
             vibrateOnClick()
+            notelistadapter.notifyDataSetChanged()
 
         }
         builder.show()
-
-
-
-
 
     }
 

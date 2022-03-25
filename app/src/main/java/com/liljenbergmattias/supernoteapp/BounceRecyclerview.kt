@@ -13,6 +13,9 @@ import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors.getColor
 
+//private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.4f
+//private const val FLING_TRANSLATION_MAGNITUDE = 0.1f
+
 /** The magnitude of translation distance while the list is over-scrolled. */
 private const val OVERSCROLL_TRANSLATION_MAGNITUDE = 0.4f
 

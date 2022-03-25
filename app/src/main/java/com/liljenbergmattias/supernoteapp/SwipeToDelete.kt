@@ -1,6 +1,7 @@
 package com.liljenbergmattias.supernoteapp
 
 import android.content.Context
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,7 +16,7 @@ abstract class SwipeToDelete(context: Context,dragDir:Int,swipeDir:Int):ItemTouc
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        TODO("Not yet implemented")
+
     }
 
 }

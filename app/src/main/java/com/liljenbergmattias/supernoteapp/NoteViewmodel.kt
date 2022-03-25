@@ -9,6 +9,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
+
 enum class LoginResult {
     LOGINOK, LOGINFAIL, REGISTERFAIL, FIRSTLOGIN
 }
@@ -88,15 +89,7 @@ class NoteViewmodel : ViewModel() {
         }
     }
 
-    fun toggleEdited(rownumber : Int) {
-        var rownote = notes.value!![rownumber]
 
-        if (rownote.noteedited == true) {
-            rownote.noteedited = false
-        } else {
-            rownote.noteedited = true
-        }
-    }
 
 
     fun logout()
@@ -133,6 +126,7 @@ class NoteViewmodel : ViewModel() {
 
 
 
+
     fun loadNotes()
     {
         val database = Firebase.database.reference
@@ -152,12 +146,20 @@ class NoteViewmodel : ViewModel() {
                 val tempnote = snap.getValue<Note>()!!
                 tempnote.fbid = snap.key
                 tempnotelist.add(tempnote)
+
             }
-            notes.value = tempnotelist
+            notes.value = tempnotelist.reversed()
 
         }.addOnFailureListener {
 
+
         }
+
+
+
+
+    }
+
 
 
 
@@ -171,4 +173,3 @@ class NoteViewmodel : ViewModel() {
 
 
 
-}
