@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">supernoteapp</string>
+
+    <string name="Notes">Anteckningar</string>
+    <string name="Register">Registrera</string>
+    <string name="Login">Logga in</string>
+    <string name="Home">Hem</string>
+    <string name="Create_new_note">Skapa ny anteckning</string>
+    <string name="Save_note">Spara anteckning</string>
+    <string name="Update_list">Uppdatera listan</string>
+    <string name="Logout">Logga ut</string>
+    <string name="Email">"" Email</string>
+    <string name="Password">"" Lösenord</string>
+    <string name="Note_saved">Sparat anteckning!</string>
+    <string name="Note_deleted">Anteckning raderad!</string>
+    <string name="Titelcheck">Du måste ange en titel!</string>
+    <string name="StartTypehere">Anteckna här..</string>
+    <string name="Delete">Radera</string>
+    <string name="Doyouwanttodelete">Vill du verkligen radera din anteckning?</string>
+    <string name="Deletenote">Radera anteckning</string>
+    <string name="Dontdelete">Ångra</string>
+    <string name="ForgotPassword">Glömt lösenord?</string>
+    <string name="Reset">Återställ lösenord</string>
+    <string name="Welcome">Välkommen!</string>
+    <string name="Invalid_login">Felaktig inloggning!</string>
+    <string name="Invalid_registration">Felaktig registrering!</string>
+    <string name="Invalid_email">Denna email existerar inte, vänligen försök igen!</string>
+    <string name="EnterEmail">Vänligen ange en email adress!</string>
+    <string name="EnterEmailandPassword">Vänligen ange en email och ett lösenord!</string>
+    <string name="ResetEmailsuccess">Email skickats för att återställa ditt lösenord</string>
+    <string name="StayConnected">Kontrollera att du är ansluten till internet innan användning.</string>
+
+</resources>

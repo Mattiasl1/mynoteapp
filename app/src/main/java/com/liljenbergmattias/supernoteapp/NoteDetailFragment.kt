@@ -42,6 +42,14 @@ class NoteDetailFragment : Fragment(), PressOnBack {
     var currentnote = Note()
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i("NOTEDEBUG", "Gått till anteckning")
+
+    }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,16 +122,9 @@ class NoteDetailFragment : Fragment(), PressOnBack {
                 model.saveNote(currentnote)
 
 
-                /* // *****NÅGON HAR REDIGERAT NOTE*****
-                 notelistadapter.startfrag.toggleEdited(key = currentnote.fbid!!)
-                 currentnote.noteedited = true
-                 notelistadapter.notifyDataSetChanged()
-                 */
-
-
-                Snackbar.make(view, "Sparat anteckning!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, (resources.getString(R.string.Note_saved)), Snackbar.LENGTH_SHORT).show()
             } else{
-                Snackbar.make(view, "Du behöver ange en titel!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, (resources.getString(R.string.Titelcheck)), Snackbar.LENGTH_SHORT).show()
             }
 
         }

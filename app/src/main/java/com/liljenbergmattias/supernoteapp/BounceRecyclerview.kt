@@ -10,6 +10,7 @@ import android.widget.EdgeEffect
 import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors.getColor
 
@@ -24,6 +25,7 @@ private const val FLING_TRANSLATION_MAGNITUDE = 0.1f
 
 
 class BounceEdgeEffectFactory : RecyclerView.EdgeEffectFactory() {
+
 
     override fun createEdgeEffect(recyclerView: RecyclerView, direction: Int): EdgeEffect {
 
@@ -57,6 +59,8 @@ class BounceEdgeEffectFactory : RecyclerView.EdgeEffectFactory() {
 
             override fun onRelease() {
                 super.onRelease()
+
+
                 // The finger is lifted. Start the animation to bring translation back to the resting state.
                 if (recyclerView.translationY != 0f) {
                     translationAnim = createAnim()?.also { it.start() }

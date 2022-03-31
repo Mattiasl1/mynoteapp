@@ -15,26 +15,14 @@ import com.google.firebase.ktx.Firebase
 /*
 ATT GÖRA LISTA:
 
-                            **Inloggning**
-                Kontrollera att email existerar?  -> validera email
-                Kontrollera lösenord vid registrering?
-                Återställa lösenord?
-                            ******************************
-                            ******************************
+               Spara ny position till firebase - ej klar
+               Swipe left to delete - ej klar
 
 
-                ta bort rad - klar, Swipe left to delete - fråga Bill
-
-                Kunna välja att ha checklista - fråga bill
-
-
-                Reorder item
-                Ny rad, alltid stor bokstav - Klar
-                Respons när man klickr på en anteckning (ONpress -> vibrera) - klar
+               översätt- klar?
+               ta bort rad - klar
 
 
-                Bättra på UI -
-                anpassa anteckningar, t.ex textstorlek, färg. -
 
 
 
@@ -77,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<TextView>(R.id.loginPasswordedittextTWO)
 
         model.loginOK.observe(this, loginObserver)
 

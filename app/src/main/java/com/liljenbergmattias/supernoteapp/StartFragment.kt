@@ -31,6 +31,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.snapshot.Index
 import com.google.firebase.ktx.Firebase
 import com.liljenbergmattias.supernoteapp.databinding.FragmentStartBinding
 import kotlinx.coroutines.flow.callbackFlow
@@ -72,67 +73,70 @@ class StartFragment() : Fragment(), PressOnBack {
 
     }
 
-    //@SuppressLint("ClickableViewAccessibility")
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         val mynoteRV = binding.notesRV
         mynoteRV.apply {
-            binding.notesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.notesRV.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
             binding.notesRV.adapter = notelistadapter
 
             edgeEffectFactory = BounceEdgeEffectFactory()
 
+
         }
-   
 
 
 
 
 
+        var simpleCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+            DEFAULT_SWIPE_ANIMATION_DURATION
+        ) {
 
-        var simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
-            DEFAULT_SWIPE_ANIMATION_DURATION)
-        {
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                val database = Firebase.database.reference
-                val auth = Firebase.auth
-/*
-                 if positionindex >= oldpositionindex
-                 index -1
-                 else
-                 index +1
-                  */
 
 
                 val startPosition = viewHolder.adapterPosition
-                val endposition = target.adapterPosition
+                var endPosition = target.adapterPosition
+                val oldpos = viewHolder.oldPosition
 
 
-                Collections.swap(model.notes.value!!, startPosition, endposition)
 
-                notelistadapter.notifyItemMoved(startPosition, endposition)
+                Collections.swap(model.notes.value!!, startPosition, endPosition)
 
+                notelistadapter.notifyItemMoved(startPosition, endPosition)
+
+
+
+
+
+
+
+
+
+
+                // SPARA TILL FIREBASE
 
 
 
                 return true
-
-
             }
-
-
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                //model.notes.value!!
+
                 notelistadapter.notifyDataSetChanged()
                 return
             }
@@ -144,33 +148,22 @@ class StartFragment() : Fragment(), PressOnBack {
 
 
 
+
+
+
         val reloadImage = binding.noteStartReloadRvImage
-
-
-
-
         fun reloadlist(){
             reloadImage.animate().apply {
 
-                duration = 500
+                duration = 300
 
                 rotationXBy(180f)
             }.start()
             Log.i("NOTEDEBUG", "LADDA OM RECYCLERVIEW")
+
+
             model.loadNotes()
-        /*
-            binding.noteStartprogressBar.visibility = View.VISIBLE
-            val noteobserver = Observer<List<Note>> {
 
-                notelistadapter.notifyDataSetChanged()
-            }
-
-            model.notes.observe(viewLifecycleOwner, noteobserver)
-
-
-            binding.noteStartprogressBar.visibility = View.INVISIBLE
-
-             */
         }
         val scaleUp = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_up)
         val scaleDown = AnimationUtils.loadAnimation(requireContext(), R.anim.scale_down)
@@ -178,9 +171,6 @@ class StartFragment() : Fragment(), PressOnBack {
         val logOutImage = binding.noteStartLogoutImage
         fun pressaddButton()
         {
-
-
-
 
               var delaytrans = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -300,34 +290,6 @@ class StartFragment() : Fragment(), PressOnBack {
 
         model.loadNotes()
 
-
-
-
-
-
-        /*
-        binding.startAddButtonImage.setOnClickListener {
-
-
-            notelistadapter.notifyDataSetChanged()
-            requireActivity().
-            supportFragmentManager.beginTransaction().
-            add((R.id.fragContainer), NoteDetailFragment()).addToBackStack(null).commit()
-        }
-         */
-
-        /*
-        binding.addNoteButton.setOnClickListener {
-            requireActivity().
-            supportFragmentManager.beginTransaction().
-            add((R.id.fragContainer), NoteDetailFragment()).addToBackStack(null).commit()
-
-        }
-         */
-
-
-
-
     }
 
 
@@ -335,6 +297,8 @@ class StartFragment() : Fragment(), PressOnBack {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 
 
@@ -353,14 +317,7 @@ class StartFragment() : Fragment(), PressOnBack {
 
     }
 
-    fun toggleEdited(key: String)
-    {
-        val database = Firebase.database.reference
-        val auth = Firebase.auth
-        database.child("myNotesapp").child(auth.currentUser!!.uid).
-        child("notese").child(key)
-            notelistadapter.notifyDataSetChanged()
-    }
+
 
     fun vibrateOnClick() {
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -378,17 +335,19 @@ class StartFragment() : Fragment(), PressOnBack {
     }
 
 
+
+
     fun deleterow(key : String)
     {
         val database = Firebase.database.reference
         val auth = Firebase.auth
 
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Radera anteckning")
-        builder.setMessage("Vill du verkligen radera din anteckning?")
+        builder.setTitle((resources.getString(R.string.Deletenote)))
+        builder.setMessage((resources.getString(R.string.Doyouwanttodelete)))
 
 
-        builder.setPositiveButton("Radera") { dialog, which ->
+        builder.setPositiveButton((resources.getString(R.string.Delete))) { dialog, which ->
             vibrateOnClick()
 
             database.child("myNotesapp").child(auth.currentUser!!.uid).
@@ -396,12 +355,12 @@ class StartFragment() : Fragment(), PressOnBack {
             requireActivity().supportFragmentManager.beginTransaction().
             add((R.id.fragContainer), StartFragment()).replace(R.id.fragContainer, StartFragment()).commit()
             notelistadapter.notifyDataSetChanged()
-            Snackbar.make(requireView(), "Raderat anteckning!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), (resources.getString(R.string.Note_deleted)), Snackbar.LENGTH_SHORT).show()
 
 
         }
 
-        builder.setNegativeButton("Ångra") { dialog, which ->
+        builder.setNegativeButton((resources.getString(R.string.Dontdelete))) { dialog, which ->
             vibrateOnClick()
             notelistadapter.notifyDataSetChanged()
 
@@ -415,24 +374,11 @@ class StartFragment() : Fragment(), PressOnBack {
     }
 
 
-    /*
-    database.child("myNotesapp").child(auth.currentUser!!.uid).
-        child("notese").removeValue()
-     */
 
-
-
-    /*
-    fun removeAt(rownotes: Note) {
-        val notedetailfrag = NoteDetailFragment()
-        notedetailfrag.currentnote = rownotes
-
-        currentnote.removeAt(rownotes)
-
-    }
-     */
 
 
 
 
 }
+
+

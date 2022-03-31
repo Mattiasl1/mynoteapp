@@ -21,7 +21,7 @@ class LoginFragment : Fragment() {
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    val FirstLogin = Boolean
+
 
     private val model : NoteViewmodel by activityViewModels()
 
@@ -37,10 +37,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val passwordControll = binding.loginPasswordedittextTWO.text.toString()
-        val passwordOne = binding.loginPasswordedittext.text.toString()
 
-        binding.loginPasswordedittextTWO.visibility = View.INVISIBLE
 
         fun vibrateOnClick() {
             val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -52,28 +49,61 @@ class LoginFragment : Fragment() {
         }
 
 
+        binding.goResetPassword.setOnClickListener {
+            vibrateOnClick()
+            var delaytrans = requireActivity().supportFragmentManager.beginTransaction()
 
-
+            delaytrans.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+            delaytrans.add((R.id.fragContainer), EditNoteDetailFragment())
+            delaytrans.addToBackStack(null)
+            delaytrans.commit()
+        }
 
 
 
 
         binding.loginButton.setOnClickListener {
             vibrateOnClick()
-            val email = binding.loginEmailEdittext.text.toString()
-            val password = binding.loginPasswordedittext.text.toString()
-            model.login(email, password)
+            val email = binding.loginEmailEdittext
+            val password = binding.loginPasswordedittext
+
+
+            if (email.text.isEmpty() && password.text.isEmpty()) {
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+            } else if(email.text.isNotEmpty() && password.text.isNotEmpty()) {
+                model.login(email.text.toString(), password.text.toString())
+            }
+            if (email.text.isEmpty()){
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+
+            }
+            if (password.text.isEmpty())
+            {
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+            }
 
         }
 
 
         binding.registerButton.setOnClickListener {
             vibrateOnClick()
+            val email = binding.loginEmailEdittext
+            val password = binding.loginPasswordedittext
+            if (email.text.isEmpty() && password.text.isEmpty()) {
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+            } else if(email.text.isNotEmpty() && password.text.isNotEmpty()) {
+                model.signup(email.text.toString(), password.text.toString())
+            }
+            if (email.text.isEmpty()){
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+
+            }
+            if (password.text.isEmpty())
+            {
+                Snackbar.make(requireView(), (resources.getString(R.string.EnterEmailandPassword)), Snackbar.LENGTH_SHORT).show()
+            }
 
 
-                val email = binding.loginEmailEdittext.text.toString()
-                val password = binding.loginPasswordedittext.text.toString()
-                model.signup(email, password)
 
 
         }
@@ -85,18 +115,18 @@ class LoginFragment : Fragment() {
 
             if (it == LoginResult.LOGINOK)
             {
-                Snackbar.make(view, "Välkommen!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, resources.getString(R.string.Welcome), Snackbar.LENGTH_SHORT).show()
             }
 
             if(it == LoginResult.LOGINFAIL)
             {
                 Log.i("NOTEDEBUG", "LOGIN FAIL")
-                Snackbar.make(view, "Felaktig inloggning", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, resources.getString(R.string.Invalid_login), Snackbar.LENGTH_SHORT).show()
             }
             if(it == LoginResult.REGISTERFAIL)
             {
                 Log.i("NOTEDEBUG", "REGISTER FAIL")
-                Snackbar.make(view, "Felaktig registrering", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, resources.getString(R.string.Invalid_registration), Snackbar.LENGTH_SHORT).show()
             }
 
 

@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/drawable/ic_round_text_snippet_24.xml" value="0.182" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.183" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24649353027343748" />
-        <entry key="app/src/main/res/layout/fragment_edit_note_detail.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/fragment_edit_note_detail.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_note_detail.xml" value="0.15725250244140623" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.25" />

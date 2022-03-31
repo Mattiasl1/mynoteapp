@@ -11,12 +11,9 @@ import com.google.firebase.ktx.Firebase
 
 
 enum class LoginResult {
-    LOGINOK, LOGINFAIL, REGISTERFAIL, FIRSTLOGIN
+    LOGINOK, LOGINFAIL, REGISTERFAIL
 }
 
-enum class NoteEdited {
-    EDITED, NOTEDITED
-}
 
 class NoteViewmodel : ViewModel() {
     lateinit var database: DatabaseReference
@@ -126,6 +123,29 @@ class NoteViewmodel : ViewModel() {
 
 
 
+     fun saveNewPosition(mynotes: Note) {
+         val database = Firebase.database.reference
+         val auth = Firebase.auth
+         val notespath = database.child("myNotesapp").child(auth.currentUser!!.uid).
+         child("notese")
+         if(mynotes.noteIndexOrderNumber >= 0)
+         {
+             notespath.child(mynotes.noteIndexOrderNumber.toString()).setValue(mynotes)
+
+
+         }
+
+         saveNoteStatus.value = true
+
+         saveNoteStatus.value = null
+         loadNotes()
+
+
+     }
+
+
+
+
 
     fun loadNotes()
     {
@@ -148,7 +168,10 @@ class NoteViewmodel : ViewModel() {
                 tempnotelist.add(tempnote)
 
             }
-            notes.value = tempnotelist.reversed()
+
+            notes.value = tempnotelist.reversed().sortedBy {
+                it.noteIndexOrderNumber
+            }
 
         }.addOnFailureListener {
 

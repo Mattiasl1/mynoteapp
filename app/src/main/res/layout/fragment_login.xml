@@ -17,8 +17,9 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/customtextfield"
         android:ems="10"
-        android:hint=" Email"
+        android:hint="@string/Email"
         android:inputType="textEmailAddress"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,39 +33,24 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/customtextfield"
         android:ems="10"
-        android:hint=" Lösenord"
+        android:hint="@string/Password"
         android:inputType="textPassword"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginEmailEdittext" />
-
-    <EditText
-        android:id="@+id/loginPasswordedittextTWO"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/customtextfield"
-        android:ems="10"
-        android:hint=" Repetera lösenord"
-        android:inputType="textPassword"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittext" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
         android:padding="5dp"
-        android:text="Registrera"
+        android:text="@string/Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittextTWO" />
+        app:layout_constraintTop_toBottomOf="@+id/goResetPassword" />
 
     <Button
         android:id="@+id/loginButton"
@@ -72,8 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_button"
-        android:text="Logga in"
         android:padding="5dp"
+        android:text="@string/Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerButton" />
@@ -128,7 +114,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
-        android:text="Hem"
+        android:text="@string/Home"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
@@ -138,7 +124,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Skapa ny anteckning"
+        android:text="@string/Create_new_note"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -148,7 +134,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Logga ut"
+        android:text="@string/Logout"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -158,7 +144,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Uppdatera listan"
+        android:text="@string/Update_list"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -179,7 +165,30 @@
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Spara anteckning"
+        android:text="@string/Save_note"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/goResetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+
+        android:text="@string/ForgotPassword"
+        android:textColor="#ACDE9C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordedittext" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/StayConnected"
+        app:layout_constraintBottom_toTopOf="@+id/loginEmailEdittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

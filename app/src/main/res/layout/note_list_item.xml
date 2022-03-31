@@ -57,15 +57,16 @@
         tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/noteDateTextView"
+        android:id="@+id/noteIndexTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
         android:text="TextView"
-        android:textSize="8sp"
-        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteItemTitleTextView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
